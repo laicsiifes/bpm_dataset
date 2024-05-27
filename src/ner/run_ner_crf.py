@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     ner_column = 1
 
-    report_dir = '../../data/reports/ner'
+    report_dir = '../../data/reports/ner/crf'
 
     train_file = '../../data/corpus/conll/train.conll'
     test_file = '../../data/corpus/conll/test.conll'
