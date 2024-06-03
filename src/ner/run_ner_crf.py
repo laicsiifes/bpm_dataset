@@ -6,6 +6,7 @@ from src.ner.ner_features import data_preprocessing, convert_data
 from sklearn_crfsuite import CRF
 from seqeval.metrics import classification_report
 from src.ner.ner_utils import dump_report
+from sklearn.metrics import ConfusionMatrixDisplay
 
 
 if __name__ == '__main__':
@@ -58,7 +59,7 @@ if __name__ == '__main__':
     print(f'\nTrain Labels: {len(all_train_labels)} -- {all_train_labels}')
     print(f'Test Labels: {len(all_test_labels)} -- {all_test_labels}')
 
-    crf = CRF(algorithm='lbfgs', c1=0.1, c2=0.1, max_iterations=1000, all_possible_transitions=True)
+    crf = CRF(algorithm='lbfgs', c1=0.1, c2=0.1, max_iterations=2000, all_possible_transitions=True)
 
     print('\nEvaluating CRF')
 
@@ -91,8 +92,6 @@ if __name__ == '__main__':
 
     with open(script_result_file, 'w', encoding='utf-8') as file:
         file.write(data_conll)
-
-    from sklearn.metrics import ConfusionMatrixDisplay
 
     all_y_test = []
 

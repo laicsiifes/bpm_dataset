@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import spacy
 import random
@@ -8,7 +9,10 @@ from src.corpus.corpus_utils import save_conll_file
 if __name__ == '__main__':
 
     file_path = '../../data/corpus/anotacoes/admin.jsonl'
-    conll_file_path = '../data/corpus/business_process.conll'
+
+    conll_file_path = '../../data/corpus/conll/'
+
+    os.makedirs(conll_file_path, exist_ok=True)
 
     nlp = spacy.load('en_core_web_sm')
 
@@ -24,7 +28,7 @@ if __name__ == '__main__':
 
         text_aux = text.replace('\n', ' ')
 
-        # print(f'\nText: {text_aux}')
+        print(f'\nText: {text_aux}')
 
         list_entity_annotations = row['entities']
 
@@ -42,9 +46,9 @@ if __name__ == '__main__':
                 end_offset = token.idx + len(token.text) - 1
                 tokens.append([start_offset, end_offset, token.text])
             list_sentences.append((sentence.start_char, sentence.end_char, tokens))
-            # print(f'\tSentence: {sentence.start_char} - {sentence.end_char} - {tokens}')
+            print(f'\tSentence: {sentence.start_char} - {sentence.end_char} - {tokens}')
 
-        # print('\n')
+        print('\n')
 
         all_entities = []
 
@@ -56,6 +60,11 @@ if __name__ == '__main__':
             start_entity = entity_annotation['start_offset']
             end_entity = entity_annotation['end_offset']
             entity = text[start_entity: end_entity].strip()
+
+            """
+                Os casos a seguir tiveram que ser corrigidos via código por problemas de divergência nas posições dos 
+                tokens.
+            """
 
             if 'As a basic principle,' in text:
 
@@ -104,7 +113,13 @@ if __name__ == '__main__':
             if start_entity == 2922:
                 entity = text[start_entity - 1: end_entity].strip()
 
-            # print(f'\tEntity Annotation: {label} - {entity} - {start_entity} - {end_entity}')
+            if start_entity == 658:
+                entity = text[start_entity: end_entity + 1].strip()
+
+            if start_entity == 776:
+                entity = text[start_entity - 1: end_entity].strip()
+
+            print(f'\tEntity Annotation: {label} - {entity} - {start_entity} - {end_entity}')
 
             is_founded = False
 
@@ -121,29 +136,29 @@ if __name__ == '__main__':
                             cont += 1
                         elif start_entity < token[0] < end_entity:
                             token.append(f'I-{label}')
-                        # print(f'\t\tToken: {token}')
+                        print(f'\t\tToken: {token}')
                     break
 
             if not is_founded:
                 print('\t\t====> ERROR.')
                 exit(-1)
 
-        # print(len(list_entity_annotations), '--', cont, '\n')
+        print(len(list_entity_annotations), '--', cont, '\n')
 
         for sentence in list_sentences:
             for token in sentence[2]:
                 if len(token) == 3:
                     token.append('O')
-            # print(sentence)
+            print(sentence)
 
         all_sentences.append(list_sentences)
 
-    print(f'\nTotal of Sentences: {len(all_sentences)}')
+    print(f'\nTotal of Documents: {len(all_sentences)}')
 
     list_sentences_idx = list(range(len(all_sentences)))
 
-    n_examples_test = round(len(list_sentences_idx) * 0.1)
-    n_examples_val = round(len(list_sentences_idx) * 0.1)
+    n_examples_test = round(len(list_sentences_idx) * 0.10)
+    n_examples_val = round(len(list_sentences_idx) * 0.10)
     n_examples_train = len(list_sentences_idx) - n_examples_test - n_examples_val
 
     print(f'\nTrain: {n_examples_train}')
@@ -184,9 +199,9 @@ if __name__ == '__main__':
     print(f'Val: {len(val_sentences)}')
     print(f'Test: {len(test_sentences)}')
 
-    train_conll_file_path = '../../data/corpus/conll/train.conll'
-    val_conll_file_path = '../../data/corpus/conll/validation.conll'
-    test_conll_file_path = '../../data/corpus/conll/test.conll'
+    train_conll_file_path = os.path.join(conll_file_path, 'train.conll')
+    val_conll_file_path = os.path.join(conll_file_path, 'validation.conll')
+    test_conll_file_path = os.path.join(conll_file_path, 'test.conll')
 
     save_conll_file(train_sentences, train_conll_file_path)
     save_conll_file(val_sentences, val_conll_file_path)

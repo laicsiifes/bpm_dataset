@@ -11,13 +11,12 @@ if __name__ == '__main__':
 
     corpus_dir = '../../data/corpus/conll/'
 
-    report_dir = '../../data/reports/ner/bilstm_crf'
     model_dir = '../../data/models/ner'
 
     list_embedding_names = [
-        # 'glove',
+        'glove',
         'flair',
-        # 'bert_base'
+        'bert_base'
     ]
 
     is_use_crf = True
@@ -58,9 +57,7 @@ if __name__ == '__main__':
     embedding_model_name = '_'.join(list_embedding_names)
 
     model_dir = os.path.join(model_dir, embedding_model_name)
-    report_dir = os.path.join(report_dir, embedding_model_name)
 
-    os.makedirs(report_dir, exist_ok=True)
     os.makedirs(model_dir, exist_ok=True)
 
     corpus = ColumnCorpus(corpus_dir, columns_dict, train_file=train_file, test_file=test_file,
