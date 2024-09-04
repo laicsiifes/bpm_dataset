@@ -1,5 +1,4 @@
 import os
-import pandas as pd
 import matplotlib.pyplot as plt
 
 from seqeval.metrics import classification_report
@@ -11,13 +10,11 @@ if __name__ == '__main__':
 
     model_dir = '../../data/models/ner'
 
-    report_dir = '../../data/reports/ner/bilstm_crf'
+    results_dir = '../../data/results/ner/'
 
-    os.makedirs(report_dir, exist_ok=True)
+    os.makedirs(results_dir, exist_ok=True)
 
     list_model_names = os.listdir(model_dir)
-
-    columns_names = ['tokens', 'real_tag', 'predicted_tag']
 
     for model_name in list_model_names:
 
@@ -52,9 +49,13 @@ if __name__ == '__main__':
                 y_test.clear()
                 y_pred.clear()
 
+        results_model_dir = os.path.join(results_dir, model_name)
+
+        os.makedirs(results_model_dir, exist_ok=True)
+
         dict_report = classification_report(all_y_test, all_y_pred, output_dict=True)
 
-        results_file_path = os.path.join(report_dir, f'results_{model_name}.csv')
+        results_file_path = os.path.join(results_model_dir, f'{model_name}.csv')
 
         dump_report(dict_report, results_file_path)
 
@@ -68,12 +69,28 @@ if __name__ == '__main__':
         for y in all_y_pred:
             list_y_pred.extend(y)
 
-        ConfusionMatrixDisplay.from_predictions(list_y_test, list_y_pred, xticks_rotation='vertical')
+        plt.rcParams.update({'font.size': 10})
+
+        disp = ConfusionMatrixDisplay.from_predictions(list_y_test, list_y_pred, xticks_rotation=90)
+
+        fig = disp.ax_.get_figure()
+
+        fig.set_figwidth(6)
+
+        fig.set_figheight(5)
+
+        plt.subplots_adjust(left=0.25, bottom=0.25)
+
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+
+        plt.ylabel('Labels Reais', fontsize=15)
+        plt.xlabel('Labels Preditas', fontsize=15)
 
         confusion_matrix_name = f'{model_name}_confusion_matrix.pdf'
 
         confusion_matrix_name = confusion_matrix_name.lower()
 
-        img_path = os.path.join(report_dir, confusion_matrix_name)
+        img_path = os.path.join(results_model_dir, confusion_matrix_name)
 
         plt.savefig(img_path, dpi=300)

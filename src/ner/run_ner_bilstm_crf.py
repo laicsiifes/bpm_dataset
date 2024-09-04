@@ -14,9 +14,14 @@ if __name__ == '__main__':
     model_dir = '../../data/models/ner'
 
     list_embedding_names = [
+
         'glove',
+
         'flair',
+
+        # 'distilbert',
         'bert_base'
+
     ]
 
     is_use_crf = True
@@ -30,9 +35,9 @@ if __name__ == '__main__':
         1: 'label'
     }
 
-    train_file = f'train.conll'
-    val_file = f'validation.conll'
-    test_file = f'test.conll'
+    train_file = 'train.conll'
+    val_file = 'validation.conll'
+    test_file = 'test.conll'
 
     list_embedding = []
 
@@ -46,17 +51,33 @@ if __name__ == '__main__':
         list_embedding.append(forward_flair_embeddings)
         list_embedding.append(backward_flair_embeddings)
 
+    if 'distilbert' in list_embedding_names:
+        bert_embeddings = TransformerWordEmbeddings('distilbert/distilbert-base-cased')
+        list_embedding.append(bert_embeddings)
+
     if 'bert_base' in list_embedding_names:
         bert_embeddings = TransformerWordEmbeddings('google-bert/bert-base-cased')
         list_embedding.append(bert_embeddings)
 
-    print(f'\nList Embeddings: {list_embedding_names}')
+    if 'bert_large' in list_embedding_names:
+        bert_embeddings = TransformerWordEmbeddings('google-bert/bert-large-cased')
+        list_embedding.append(bert_embeddings)
+
+    if 'roberta_base' in list_embedding_names:
+        bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-base')
+        list_embedding.append(bert_embeddings)
+
+    if 'roberta_large' in list_embedding_names:
+        bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-large')
+        list_embedding.append(bert_embeddings)
+
+    print(f'\nList Embeddings: {list_embedding_names}\n')
 
     stacked_embeddings = StackedEmbeddings(list_embedding)
 
     embedding_model_name = '_'.join(list_embedding_names)
 
-    model_dir = os.path.join(model_dir, embedding_model_name)
+    model_dir = os.path.join(model_dir, f'bilstm_crf_{embedding_model_name}')
 
     os.makedirs(model_dir, exist_ok=True)
 
@@ -82,5 +103,5 @@ if __name__ == '__main__':
 
     trainer = ModelTrainer(tagger, corpus)
 
-    trainer.train(base_path=model_dir, optimizer=SGD, learning_rate=0.1, patience=20,
+    trainer.train(base_path=model_dir, optimizer=SGD, learning_rate=0.1, patience=10,
                   mini_batch_size=batch_size, max_epochs=n_epochs)

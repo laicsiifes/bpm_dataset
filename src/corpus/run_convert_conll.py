@@ -164,45 +164,45 @@ if __name__ == '__main__':
     print(f'\nTrain: {n_examples_train}')
     print(f'Val: {n_examples_val}')
     print(f'Test: {n_examples_test}')
-
-    list_test_idx = random.choices(list_sentences_idx, k=n_examples_test)
-
-    list_sentences_idx = [idx for idx in list_sentences_idx if idx not in list_test_idx]
-
-    list_val_idx = random.choices(list_sentences_idx, k=n_examples_val)
-
-    list_train_idx = [idx for idx in list_sentences_idx if idx not in list_val_idx]
-
-    list_train_idx.sort()
-    list_val_idx.sort()
-    list_test_idx.sort()
-
-    print(f'\nTrain: {list_train_idx}')
-    print(f'Validation: {list_val_idx}')
-    print(f'Test: {list_test_idx}')
-
-    list_sentences_idx = list(range(len(all_sentences)))
-
-    train_sentences = []
-    val_sentences = []
-    test_sentences = []
-
-    for idx in list_sentences_idx:
-        if idx in list_train_idx:
-            train_sentences.extend(all_sentences[idx])
-        elif idx in list_val_idx:
-            val_sentences.extend(all_sentences[idx])
-        elif idx in list_test_idx:
-            test_sentences.extend(all_sentences[idx])
-
-    print(f'\nTrain: {len(train_sentences)}')
-    print(f'Val: {len(val_sentences)}')
-    print(f'Test: {len(test_sentences)}')
-
-    train_conll_file_path = os.path.join(conll_file_path, 'train.conll')
-    val_conll_file_path = os.path.join(conll_file_path, 'validation.conll')
-    test_conll_file_path = os.path.join(conll_file_path, 'test.conll')
-
-    save_conll_file(train_sentences, train_conll_file_path)
-    save_conll_file(val_sentences, val_conll_file_path)
-    save_conll_file(test_sentences, test_conll_file_path)
+    #
+    # list_test_idx = random.choices(list_sentences_idx, k=n_examples_test)
+    #
+    # list_sentences_idx = [idx for idx in list_sentences_idx if idx not in list_test_idx]
+    #
+    # list_val_idx = random.choices(list_sentences_idx, k=n_examples_val)
+    #
+    # list_train_idx = [idx for idx in list_sentences_idx if idx not in list_val_idx]
+    #
+    # list_train_idx.sort()
+    # list_val_idx.sort()
+    # list_test_idx.sort()
+    #
+    # print(f'\nTrain: {list_train_idx}')
+    # print(f'Validation: {list_val_idx}')
+    # print(f'Test: {list_test_idx}')
+    #
+    # list_sentences_idx = list(range(len(all_sentences)))
+    #
+    # train_sentences = []
+    # val_sentences = []
+    # test_sentences = []
+    #
+    # for idx in list_sentences_idx:
+    #     if idx in list_train_idx:
+    #         train_sentences.extend(all_sentences[idx])
+    #     elif idx in list_val_idx:
+    #         val_sentences.extend(all_sentences[idx])
+    #     elif idx in list_test_idx:
+    #         test_sentences.extend(all_sentences[idx])
+    #
+    # print(f'\nTrain: {len(train_sentences)}')
+    # print(f'Val: {len(val_sentences)}')
+    # print(f'Test: {len(test_sentences)}')
+    #
+    # train_conll_file_path = os.path.join(conll_file_path, 'train.conll')
+    # val_conll_file_path = os.path.join(conll_file_path, 'validation.conll')
+    # test_conll_file_path = os.path.join(conll_file_path, 'test.conll')
+    #
+    # save_conll_file(train_sentences, train_conll_file_path)
+    # save_conll_file(val_sentences, val_conll_file_path)
+    # save_conll_file(test_sentences, test_conll_file_path)
