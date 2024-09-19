@@ -93,13 +93,18 @@ def extract_entities(text, list_entity_annotations, nlp):
 
 
 def mark_entities(entity, label, text, window=5):
-    start_position = entity[3] - window
-    end_position = entity[4] + window
-    prefix_text = text[:start_position]
-    fragment = text[start_position:end_position]
-    fragment = fragment.replace(entity[1], label)
-    sufix_text = text[end_position:]
-    return f'{prefix_text}{fragment}{sufix_text}'
+
+    if text.lower().count(entity[1].lower()) == 1:
+        text = text.replace(entity[1], label)
+        return text
+    else:
+        start_position = entity[3] - window
+        end_position = entity[4] + window
+        prefix_text = text[:start_position]
+        fragment = text[start_position:end_position]
+        fragment = fragment.replace(entity[1], label)
+        sufix_text = text[end_position:]
+        return f'{prefix_text}{fragment}{sufix_text}'
 
 
 def save_relation_files(list_relation_annotations, list_entities, text, id_example,
