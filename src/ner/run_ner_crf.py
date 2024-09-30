@@ -31,9 +31,9 @@ if __name__ == '__main__':
 
     report_dir = '../../data/results/ner/crf'
 
-    train_file = '../../data/corpus/conll/train.conll'
-    validation_file = '../../data/corpus/conll/validation.conll'
-    test_file = '../../data/corpus/conll/test.conll'
+    train_file = '../../data/corpus/v2/train.conll'
+    validation_file = '../../data/corpus/v2/validation.conll'
+    test_file = '../../data/corpus/v2/test.conll'
 
     os.makedirs(report_dir, exist_ok=True)
 

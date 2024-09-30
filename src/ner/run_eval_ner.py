@@ -69,7 +69,7 @@ if __name__ == '__main__':
         for y in all_y_pred:
             list_y_pred.extend(y)
 
-        plt.rcParams.update({'font.size': 10})
+        plt.rcParams.update({'font.size': 8})
 
         disp = ConfusionMatrixDisplay.from_predictions(list_y_test, list_y_pred, xticks_rotation=90)
 

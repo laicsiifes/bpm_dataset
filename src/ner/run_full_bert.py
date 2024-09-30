@@ -35,20 +35,20 @@ if __name__ == '__main__':
     # model_name = 'distilbert'
     # model_name = 'bert_base'
     # model_name = 'roberta_base'
-    # model_name = 'bert_large'
-    model_name = 'roberta_large'
+    model_name = 'bert_large'
+    # model_name = 'roberta_large'
 
     num_epochs = 100
 
     batch_size = 32
 
-    corpus_dir = '../../data/corpus/conll/'
+    corpus_dir = '../../data/corpus/v2'
     model_dir = '../../data/models/ner'
     results_dir = '../../data/results/ner/'
 
-    train_file = '../../data/corpus/conll/train.conll'
-    eval_file = '../../data/corpus/conll/validation.conll'
-    test_file = '../../data/corpus/conll/test.conll'
+    train_file = '../../data/corpus/v2/train.conll'
+    eval_file = '../../data/corpus/v2/validation.conll'
+    test_file = '../../data/corpus/v2/test.conll'
 
     model_checkpoint = None
 
@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
     args = TrainingArguments(
         output_dir=training_model_dir,
-        evaluation_strategy='epoch',
+        eval_strategy='epoch',
         save_strategy='epoch',
         learning_rate=2e-5,
         num_train_epochs=num_epochs,

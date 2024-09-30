@@ -9,15 +9,15 @@ from torch.optim import SGD
 
 if __name__ == '__main__':
 
-    corpus_dir = '../../data/corpus/conll/'
+    corpus_dir = '../../data/corpus/v2/'
 
     model_dir = '../../data/models/ner'
 
     list_embedding_names = [
 
-        'glove',
+        # 'glove',
 
-        'flair',
+        # 'flair',
 
         # 'distilbert',
         'bert_base'

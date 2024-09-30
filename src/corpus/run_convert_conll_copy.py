@@ -59,19 +59,65 @@ if __name__ == '__main__':
             label = entity_annotation['label']
             start_entity = entity_annotation['start_offset']
             end_entity = entity_annotation['end_offset']
-
             entity = text[start_entity: end_entity].strip()
 
-            if start_entity == 1188 and entity == 'custome':
+            """
+                Os casos a seguir tiveram que ser corrigidos via código por problemas de divergência nas posições dos 
+                tokens.
+            """
+
+            if 'As a basic principle,' in text:
+
+                if start_entity == 2922:
+                    entity = text[start_entity - 1: end_entity].strip()
+
+                if start_entity == 659 and end_entity == 660:
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 766 and end_entity == 768:
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 1532 and end_entity == 1535:
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 1582 and end_entity == 1588:
+                    start_entity = 1579
+                    entity = text[1579: end_entity + 1].strip()
+
+                if start_entity == 1609 and end_entity == 1612:
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 1613 and end_entity == 1621:
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 1613 and end_entity == 1621:
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 1613 and end_entity == 1621:
+                    start_entity = 1611
+                    entity = text[start_entity - 1: end_entity + 1].strip()
+
+                if start_entity == 1926 and end_entity == 1928:
+                    entity = text[start_entity: end_entity + 2].strip()
+
+                if start_entity == 1992 and end_entity == 2030:
+                    start_entity = 1994
+                    entity = text[start_entity: end_entity].strip()
+
+                if start_entity == 2036 and end_entity == 2041:
+                    entity = text[start_entity: end_entity + 3].strip()
+
+                if start_entity == 2317 and end_entity == 2325:
+                    entity = text[start_entity: end_entity + 2].strip()
+
+            if start_entity == 2922:
+                entity = text[start_entity - 1: end_entity].strip()
+
+            if start_entity == 658:
                 entity = text[start_entity: end_entity + 1].strip()
-            elif start_entity == 5486 and entity == 'n the case of private insurance':
-                entity = text[start_entity - 1: end_entity + 1].strip()
-            elif start_entity == 315 and entity == 'he application is returned to the applicant/employee':
-                entity = text[start_entity - 1: end_entity + 1].strip()
-            elif start_entity == 80 and entity == 'pplications are recorded':
-                entity = text[start_entity - 1: end_entity + 1].strip()
-            elif start_entity == 776 and entity == 'eviews the dossier':
-                entity = text[start_entity - 1: end_entity + 1].strip()
+
+            if start_entity == 776:
+                entity = text[start_entity - 1: end_entity].strip()
 
             print(f'\tEntity Annotation: {label} - {entity} - {start_entity} - {end_entity}')
 
@@ -97,7 +143,7 @@ if __name__ == '__main__':
                 print('\t\t====> ERROR.')
                 exit(-1)
 
-        print(f'{len(list_entity_annotations)} -- {cont}\n')
+        print(len(list_entity_annotations), '--', cont, '\n')
 
         for sentence in list_sentences:
             for token in sentence[2]:
@@ -111,7 +157,7 @@ if __name__ == '__main__':
 
     list_sentences_idx = list(range(len(all_sentences)))
 
-    n_examples_test = round(len(list_sentences_idx) * 0.15)
+    n_examples_test = round(len(list_sentences_idx) * 0.10)
     n_examples_val = round(len(list_sentences_idx) * 0.10)
     n_examples_train = len(list_sentences_idx) - n_examples_test - n_examples_val
 

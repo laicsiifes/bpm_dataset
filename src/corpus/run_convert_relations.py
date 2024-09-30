@@ -7,9 +7,9 @@ from src.corpus.data_utils import extract_entities, save_relation_files
 
 if __name__ == '__main__':
 
-    jsonl_path = '../../data/corpus/anotacoes/admin.jsonl'
+    jsonl_path = '../../data/corpus/v2/admin-revisado.jsonl'
 
-    relations_dir = '../../data/corpus/relations/'
+    relations_dir = '../../data/corpus/v2/relations_1/'
 
     nlp = spacy.load('en_core_web_sm')
 

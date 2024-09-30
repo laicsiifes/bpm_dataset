@@ -8,9 +8,9 @@ from collections import defaultdict
 
 if __name__ == '__main__':
 
-    jsonl_path = '../../data/corpus/anotacoes/admin.jsonl'
+    jsonl_path = '../../data/corpus/v2/admin-revisado.jsonl'
 
-    relations_dir = '../../data/corpus/relations_2/'
+    relations_dir = '../../data/corpus/v2/relations_2/'
 
     os.makedirs(relations_dir, exist_ok=True)
 

@@ -13,9 +13,9 @@ from sklearn.metrics import classification_report
 
 if __name__ == '__main__':
 
-    train_file_path = '../../data/corpus/train_rel.csv'
-    val_file_path = '../../data/corpus/validation_rel.csv'
-    test_file_path = '../../data/corpus/test_rel.csv'
+    train_file_path = '../../data/corpus/v2/train_rel.csv'
+    val_file_path = '../../data/corpus/v2/validation_rel.csv'
+    test_file_path = '../../data/corpus/v2/test_rel.csv'
 
     max_features = None
 
