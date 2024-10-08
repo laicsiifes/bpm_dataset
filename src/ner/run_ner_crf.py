@@ -141,39 +141,3 @@ if __name__ == '__main__':
 
     with open(script_result_file, 'w', encoding='utf-8') as file:
         file.write(data_conll)
-
-    all_y_test = []
-
-    for y in y_test:
-        all_y_test.extend(y)
-
-    all_y_pred = []
-
-    for y in y_pred:
-        all_y_pred.extend(y)
-
-    plt.rcParams.update({'font.size': 10})
-
-    disp = ConfusionMatrixDisplay.from_predictions(all_y_test, all_y_pred, xticks_rotation=90)
-
-    fig = disp.ax_.get_figure()
-
-    fig.set_figwidth(6)
-
-    fig.set_figheight(5)
-
-    plt.subplots_adjust(left=0.25, bottom=0.25)
-
-    plt.xticks(fontsize=10)
-    plt.yticks(fontsize=10)
-
-    plt.ylabel('Labels Reais', fontsize=15)
-    plt.xlabel('Labels Preditas', fontsize=15)
-
-    confusion_matrix_name = f'{model_name}_confusion_matrix.pdf'
-
-    confusion_matrix_name = confusion_matrix_name.lower()
-
-    img_path = os.path.join(results_model_dir, confusion_matrix_name)
-
-    plt.savefig(img_path, dpi=300)
