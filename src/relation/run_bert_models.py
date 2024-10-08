@@ -45,8 +45,8 @@ if __name__ == '__main__':
     val_file_path = '../../data/corpus/v2/validation_rel.csv'
     test_file_path = '../../data/corpus/v2/test_rel.csv'
 
-    model_name = 'distilbert'
-    # model_name = 'bert_base'
+    # model_name = 'distilbert'
+    model_name = 'bert_base'
     # model_name = 'roberta_base'
     # model_name = 'bert_large'
     # model_name = 'roberta_large'
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_classes)
 
-    training_args = TrainingArguments(output_dir='training', logging_strategy='epoch',
+    training_args = TrainingArguments(output_dir=output_dir, logging_strategy='epoch',
                                       gradient_accumulation_steps=gradient_accumulation_steps,
                                       gradient_checkpointing=gradient_checkpointing,
                                       fp16=fp16, optim=optim, weight_decay=0.01, eval_steps=100,
@@ -133,6 +133,8 @@ if __name__ == '__main__':
                       callbacks=[EarlyStoppingCallback(early_stopping_patience=5)])
 
     trainer.train()
+
+    trainer.save_model(best_model_dir)
 
     y_pred, _, _ = trainer.predict(encoded_test_dataset)
 

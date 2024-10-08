@@ -55,6 +55,8 @@ def get_examples(examples_folder: str, limit: int = -1) -> tuple[list[str], list
     return list_texts, list_labels
 
 
+
+
 def read_corpus_relations(corpus_folder: str):
     list_docs_names = os.listdir(corpus_folder)
     corpus_texts = []
@@ -92,6 +94,19 @@ def save_corpus_csv(list_documents, list_labels, list_idx, csv_file_path):
         {
             'texts': all_examples,
             'labels': all_labels
+        },
+        columns=['texts', 'labels']
+    )
+
+    dataframe.to_csv(csv_file_path, mode='w', index=False, encoding='utf-8')
+
+
+def save_relations_csv(list_texts, list_labels, csv_file_path):
+
+    dataframe = pd.DataFrame(
+        {
+            'texts': list_texts,
+            'labels': list_labels
         },
         columns=['texts', 'labels']
     )
