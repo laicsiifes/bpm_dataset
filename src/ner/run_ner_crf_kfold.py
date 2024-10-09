@@ -106,7 +106,7 @@ if __name__ == '__main__':
 
         study = optuna.create_study(direction='maximize')
 
-        study.optimize(objective, n_trials=1)
+        study.optimize(objective, n_trials=10)
 
         print('\n\t\tBest trial: ')
 
@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
         dict_report = classification_report(y_test, y_pred, output_dict=True)
 
-        data_conll = ''
+        data_tsv = ''
 
         for data, real_tags, pred_tags in zip(test_data, y_test, y_pred):
             words = data[0]
@@ -137,7 +137,7 @@ if __name__ == '__main__':
                              for word, real_tag, pred_tag in
                              zip(words, real_tags, pred_tags))
             sent += '\n\n'
-            data_conll += sent
+            data_tsv += sent
 
         print(f'\n\t\t\tReport: {dict_report}')
 
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
         dump_report(dict_report, report_file)
 
-        script_result_file = os.path.join(results_folder_dir, f'results_crf_{folder_name}.tsv')
+        tsv_result_file = os.path.join(results_folder_dir, f'results_crf_{folder_name}.tsv')
 
-        with open(script_result_file, 'w', encoding='utf-8') as file:
-            file.write(data_conll)
+        with open(tsv_result_file, 'w', encoding='utf-8') as file:
+            file.write(data_tsv)

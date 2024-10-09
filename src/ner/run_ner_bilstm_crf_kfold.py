@@ -11,11 +11,8 @@ if __name__ == '__main__':
 
     folders_dir = '../../data/corpus/v2/folders'
     model_dir = '../../data/corpus/v2/models/ner'
-    results_dir = '../../data/corpus/v2/results_kfold'
 
-    os.makedirs(results_dir, exist_ok=True)
-
-    n_epochs = 10
+    n_epochs = 100
 
     is_use_crf = True
 
