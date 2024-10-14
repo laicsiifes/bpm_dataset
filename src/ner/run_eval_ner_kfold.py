@@ -1,7 +1,6 @@
 import os
 
 from seqeval.metrics import classification_report
-from sklearn.metrics import ConfusionMatrixDisplay
 from src.ner.ner_utils import dump_report
 
 

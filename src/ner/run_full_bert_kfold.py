@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     folders_dir = '../../data/corpus/v2/folders'
     model_dir = '../../data/corpus/v2/models/ner'
-    results_dir = '../../data/corpus/v2/results_kfold'
+    results_dir = '../../data/corpus/v2/results_kfold/ner'
 
     model_name = 'distilbert'
     # model_name = 'bert_base'

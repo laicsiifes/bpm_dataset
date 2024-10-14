@@ -141,13 +141,13 @@ if __name__ == '__main__':
 
         print(f'\n\t\t\tReport: {dict_report}')
 
-        report_file = os.path.join(results_folder_dir, f'results_crf_{folder_name}.csv')
+        report_file = os.path.join(results_folder_dir, f'crf_{folder_name}.csv')
 
         print(f'\n\t\tSaving the report in: {report_file}')
 
         dump_report(dict_report, report_file)
 
-        tsv_result_file = os.path.join(results_folder_dir, f'results_crf_{folder_name}.tsv')
+        tsv_result_file = os.path.join(results_folder_dir, f'crf_{folder_name}.tsv')
 
         with open(tsv_result_file, 'w', encoding='utf-8') as file:
             file.write(data_tsv)

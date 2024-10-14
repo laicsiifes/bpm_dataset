@@ -22,9 +22,9 @@ if __name__ == '__main__':
 
     list_embedding_names = [
         'glove',
-        # 'flair',
+        'flair',
         # 'distilbert',
-        # 'bert_base'
+        'bert_base'
     ]
 
     batch_size = 32
@@ -34,45 +34,45 @@ if __name__ == '__main__':
         1: 'label'
     }
 
-    list_embedding = []
-
-    if 'glove' in list_embedding_names:
-        glove_embeddings = WordEmbeddings('glove')
-        list_embedding.append(glove_embeddings)
-
-    if 'flair' in list_embedding_names:
-        forward_flair_embeddings = FlairEmbeddings('news-forward')
-        backward_flair_embeddings = FlairEmbeddings('news-backward')
-        list_embedding.append(forward_flair_embeddings)
-        list_embedding.append(backward_flair_embeddings)
-
-    if 'distilbert' in list_embedding_names:
-        bert_embeddings = TransformerWordEmbeddings('distilbert/distilbert-base-cased')
-        list_embedding.append(bert_embeddings)
-
-    if 'bert_base' in list_embedding_names:
-        bert_embeddings = TransformerWordEmbeddings('google-bert/bert-base-cased')
-        list_embedding.append(bert_embeddings)
-
-    if 'bert_large' in list_embedding_names:
-        bert_embeddings = TransformerWordEmbeddings('google-bert/bert-large-cased')
-        list_embedding.append(bert_embeddings)
-
-    if 'roberta_base' in list_embedding_names:
-        bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-base')
-        list_embedding.append(bert_embeddings)
-
-    if 'roberta_large' in list_embedding_names:
-        bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-large')
-        list_embedding.append(bert_embeddings)
-
-    print(f'\nList Embeddings: {list_embedding_names}\n')
-
     print('\n\nRunning BiLSTM-CRF NER Experiment')
 
     for folder_name in list_folder_names:
 
         print(f'\n\tFolder: {folder_name}')
+
+        list_embedding = []
+
+        if 'glove' in list_embedding_names:
+            glove_embeddings = WordEmbeddings('glove')
+            list_embedding.append(glove_embeddings)
+
+        if 'flair' in list_embedding_names:
+            forward_flair_embeddings = FlairEmbeddings('news-forward')
+            backward_flair_embeddings = FlairEmbeddings('news-backward')
+            list_embedding.append(forward_flair_embeddings)
+            list_embedding.append(backward_flair_embeddings)
+
+        if 'distilbert' in list_embedding_names:
+            bert_embeddings = TransformerWordEmbeddings('distilbert/distilbert-base-cased')
+            list_embedding.append(bert_embeddings)
+
+        if 'bert_base' in list_embedding_names:
+            bert_embeddings = TransformerWordEmbeddings('google-bert/bert-base-cased')
+            list_embedding.append(bert_embeddings)
+
+        if 'bert_large' in list_embedding_names:
+            bert_embeddings = TransformerWordEmbeddings('google-bert/bert-large-cased')
+            list_embedding.append(bert_embeddings)
+
+        if 'roberta_base' in list_embedding_names:
+            bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-base')
+            list_embedding.append(bert_embeddings)
+
+        if 'roberta_large' in list_embedding_names:
+            bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-large')
+            list_embedding.append(bert_embeddings)
+
+        print(f'\n\t\tList Embeddings: {list_embedding_names}\n')
 
         stacked_embeddings = StackedEmbeddings(list_embedding)
 
