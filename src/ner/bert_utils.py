@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def read_corpus_file(corpus_file, delimiter=' ', ner_column=1):
+def read_corpus_file(corpus_file, delimiter=' ', ner_column=1, is_unify_tags=False):
     with open(corpus_file, encoding='utf-8') as file:
         lines = file.readlines()
     data = {
@@ -16,7 +16,13 @@ def read_corpus_file(corpus_file, delimiter=' ', ner_column=1):
             if delimiter in line:
                 fragments = line.split(delimiter)
                 words.append(fragments[0])
-                labels.append(fragments[ner_column])
+                label = fragments[ner_column]
+                if is_unify_tags:
+                    if 'B-trigger' == label or 'B-catch' == label:
+                        label = 'B-activity'
+                    elif 'I-trigger' == label or 'I-catch' == label:
+                        label = 'I-activity'
+                labels.append(label)
         else:
             if len(words) > 1:
                 data['tokens'].append(words)

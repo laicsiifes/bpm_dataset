@@ -1,5 +1,4 @@
 import os
-import matplotlib.pyplot as plt
 import optuna
 
 from src.corpus.corpus_utils import read_corpus_file
@@ -7,7 +6,6 @@ from src.ner.ner_features import data_preprocessing, convert_data
 from sklearn_crfsuite import CRF
 from seqeval.metrics import classification_report
 from src.ner.ner_utils import dump_report
-from sklearn.metrics import ConfusionMatrixDisplay
 
 
 def objective(trial):

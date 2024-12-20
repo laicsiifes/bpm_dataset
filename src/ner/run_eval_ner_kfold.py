@@ -6,8 +6,8 @@ from src.ner.ner_utils import dump_report
 
 if __name__ == '__main__':
 
-    model_folders_dir = '../../data/corpus/v2/models/ner'
-    results_dir = '../../data/corpus/v2/results_kfold'
+    model_folders_dir = '../../data/corpus/v2/models/ner_simp'
+    results_dir = '../../data/corpus/v2/results_simp_kfold/ner'
 
     list_folder_names = os.listdir(model_folders_dir)
 
@@ -72,5 +72,3 @@ if __name__ == '__main__':
 
             with open(tsv_result_file, 'w', encoding='utf-8') as file:
                 file.write(data_tsv)
-
-

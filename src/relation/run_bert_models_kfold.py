@@ -35,28 +35,30 @@ if __name__ == '__main__':
     folders_dir = '../../data/corpus/v2/folders'
     model_dir = '../../data/corpus/v2/models/relations'
     results_dir = '../../data/corpus/v2/results_kfold/relations'
-    overall_results_dir = '../../data/corpus/v2/results/relations'
+    overall_results_dir = '../../data/corpus/v2/overall_results/relations'
 
     os.makedirs(model_dir, exist_ok=True)
     os.makedirs(results_dir, exist_ok=True)
     os.makedirs(overall_results_dir, exist_ok=True)
 
-    num_epochs = 1
+    num_epochs = 20
 
     max_len = 512
 
     batch_size = 16
+
+    learning_rate = 5e-5
 
     gradient_accumulation_steps = 1
     gradient_checkpointing = False
     fp16 = False
     optim = 'adamw_torch'
 
-    model_name = 'distilbert'
+    # model_name = 'distilbert'
     # model_name = 'bert_base'
     # model_name = 'roberta_base'
     # model_name = 'bert_large'
-    # model_name = 'roberta_large'
+    model_name = 'roberta_large'
 
     if model_name == 'distilbert':
         model_checkpoint = 'distilbert/distilbert-base-cased'
@@ -64,10 +66,12 @@ if __name__ == '__main__':
         model_checkpoint = 'google-bert/bert-base-cased'
     elif model_name == 'bert_large':
         model_checkpoint = 'google-bert/bert-large-cased'
+        learning_rate = 1e-5
     elif model_name == 'roberta_base':
         model_checkpoint = 'FacebookAI/roberta-base'
     elif model_name == 'roberta_large':
         model_checkpoint = 'FacebookAI/roberta-large'
+        learning_rate = 1e-5
     else:
         print('Model Name Option Invalid!')
         exit(0)
@@ -76,7 +80,7 @@ if __name__ == '__main__':
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-    print(f'\nDevice: {device}')
+    print(f'\nDevice: {device} -- {learning_rate}')
 
     print('\nRunning BERT Relations Extraction Experiment')
 
@@ -140,8 +144,8 @@ if __name__ == '__main__':
 
         model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_classes)
 
-        output_dir = os.path.join(model_dir, f'{folder_name}', 'training')
-        best_model_dir = os.path.join(model_dir, f'{folder_name}', 'best_model')
+        output_dir = os.path.join(model_dir, f'{folder_name}', f'{model_name}', 'training')
+        best_model_dir = os.path.join(model_dir, f'{folder_name}', f'{model_name}', 'best_model')
 
         os.makedirs(output_dir, exist_ok=True)
         os.makedirs(best_model_dir, exist_ok=True)
@@ -150,7 +154,7 @@ if __name__ == '__main__':
                                           gradient_accumulation_steps=gradient_accumulation_steps,
                                           gradient_checkpointing=gradient_checkpointing,
                                           fp16=fp16, optim=optim, weight_decay=0.01, eval_steps=100,
-                                          logging_steps=100, learning_rate=5e-5,
+                                          logging_steps=100, learning_rate=learning_rate,
                                           eval_strategy='epoch',
                                           per_device_train_batch_size=batch_size,
                                           per_device_eval_batch_size=batch_size,
@@ -209,7 +213,7 @@ if __name__ == '__main__':
 
     disp = ConfusionMatrixDisplay.from_predictions(list_y_test,
                                                    list_y_pred,
-                                                   xticks_rotation=50)
+                                                   xticks_rotation=90)
 
     fig = disp.ax_.get_figure()
 

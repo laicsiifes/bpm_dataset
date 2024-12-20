@@ -37,6 +37,19 @@ def read_corpus_file(corpus_file: str, delimiter: str = '\t', ner_column: int = 
             tags = []
     return data
 
+def unify_tags(list_examples: list) -> list:
+    list_unified_examples = []
+    for example in list_examples:
+        unified_tags = []
+        for tag in example[1]:
+            if 'B-trigger' == tag or 'B-catch' == tag:
+                unified_tags.append('B-activity')
+            elif 'I-trigger' == tag or 'I-catch' == tag:
+                unified_tags.append('I-activity')
+            else:
+                unified_tags.append(tag)
+        list_unified_examples.append((example[0], unified_tags))
+    return list_unified_examples
 
 def get_examples(examples_folder: str, limit: int = -1) -> tuple[list[str], list[str]]:
     list_example_names = os.listdir(examples_folder)

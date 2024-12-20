@@ -1,7 +1,7 @@
 import os
 import optuna
 
-from src.corpus.corpus_utils import read_corpus_file
+from src.corpus.corpus_utils import read_corpus_file, unify_tags
 from src.ner.ner_features import data_preprocessing, convert_data
 from sklearn_crfsuite import CRF
 from seqeval.metrics import classification_report
@@ -23,8 +23,14 @@ def objective(trial):
 
 if __name__ == '__main__':
 
+    is_unify_tags = True
+
     folders_dir = '../../data/corpus/v2/folders'
-    results_dir = '../../data/corpus/v2/results_kfold'
+
+    if is_unify_tags:
+        results_dir = '../../data/corpus/v2/results_simp_kfold/ner'
+    else:
+        results_dir = '../../data/corpus/v2/results_kfold/ner'
 
     os.makedirs(results_dir, exist_ok=True)
 
@@ -53,6 +59,11 @@ if __name__ == '__main__':
         train_data = read_corpus_file(train_file, delimiter=delimiter, ner_column=ner_column)
         validation_data = read_corpus_file(val_file, delimiter=delimiter, ner_column=ner_column)
         test_data = read_corpus_file(test_file, delimiter=delimiter, ner_column=ner_column)
+
+        if is_unify_tags:
+            train_data = unify_tags(train_data)
+            validation_data = unify_tags(validation_data)
+            test_data = unify_tags(test_data)
 
         print(f'\n\t\tTrain data: {len(train_data)}')
         print(f'\t\tValidation data: {len(validation_data)}')

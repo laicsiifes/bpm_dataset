@@ -9,8 +9,8 @@ from sklearn.metrics import ConfusionMatrixDisplay
 
 if __name__ == '__main__':
 
-    results_dir = '../../data/corpus/v2/results_kfold'
-    overall_results_dir = '../../data/corpus/v2/overall_results'
+    results_dir = '../../data/corpus/v2/results_kfold/ner'
+    overall_results_dir = '../../data/corpus/v2/overall_results/ner'
 
     os.makedirs(overall_results_dir, exist_ok=True)
 
@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
         dump_report(dict_report, results_file_path)
 
-        plt.rcParams.update({'font.size': 8})
+        plt.rcParams.update({'font.size': 6})
 
         list_y_test = []
 

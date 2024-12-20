@@ -10,7 +10,13 @@ from torch.optim import SGD
 if __name__ == '__main__':
 
     folders_dir = '../../data/corpus/v2/folders'
-    model_dir = '../../data/corpus/v2/models/ner'
+
+    is_unify_tags = True
+
+    if is_unify_tags:
+        model_dir = '../../data/corpus/v2/models/ner_simp'
+    else:
+        model_dir = '../../data/corpus/v2/models/ner'
 
     n_epochs = 100
 
@@ -53,23 +59,33 @@ if __name__ == '__main__':
             list_embedding.append(backward_flair_embeddings)
 
         if 'distilbert' in list_embedding_names:
-            bert_embeddings = TransformerWordEmbeddings('distilbert/distilbert-base-cased')
+            bert_embeddings = TransformerWordEmbeddings('distilbert/distilbert-base-cased',
+                                                        layers='all',
+                                                        allow_long_sentences=True)
             list_embedding.append(bert_embeddings)
 
         if 'bert_base' in list_embedding_names:
-            bert_embeddings = TransformerWordEmbeddings('google-bert/bert-base-cased')
+            bert_embeddings = TransformerWordEmbeddings('google-bert/bert-base-cased',
+                                                        layers='all',
+                                                        allow_long_sentences=True)
             list_embedding.append(bert_embeddings)
 
         if 'bert_large' in list_embedding_names:
-            bert_embeddings = TransformerWordEmbeddings('google-bert/bert-large-cased')
+            bert_embeddings = TransformerWordEmbeddings('google-bert/bert-large-cased',
+                                                        layers='all',
+                                                        allow_long_sentences=True)
             list_embedding.append(bert_embeddings)
 
         if 'roberta_base' in list_embedding_names:
-            bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-base')
+            bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-base',
+                                                        layers='all',
+                                                        allow_long_sentences=True)
             list_embedding.append(bert_embeddings)
 
         if 'roberta_large' in list_embedding_names:
-            bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-large')
+            bert_embeddings = TransformerWordEmbeddings('FacebookAI/roberta-large',
+                                                        layers='all',
+                                                        allow_long_sentences=True)
             list_embedding.append(bert_embeddings)
 
         print(f'\n\t\tList Embeddings: {list_embedding_names}\n')
@@ -82,9 +98,14 @@ if __name__ == '__main__':
 
         os.makedirs(model_folder_dir, exist_ok=True)
 
-        train_file = f'train_{folder_name}.conll'
-        val_file = f'val_{folder_name}.conll'
-        test_file = f'test_{folder_name}.conll'
+        if is_unify_tags:
+            train_file = f'train_simp_{folder_name}.conll'
+            val_file = f'val_simp_{folder_name}.conll'
+            test_file = f'test_simp_{folder_name}.conll'
+        else:
+            train_file = f'train_{folder_name}.conll'
+            val_file = f'val_{folder_name}.conll'
+            test_file = f'test_{folder_name}.conll'
 
         corpus_folder_dir = os.path.join(folders_dir, f'{folder_name}')
 

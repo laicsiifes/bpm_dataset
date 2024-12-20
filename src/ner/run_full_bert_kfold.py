@@ -1,10 +1,11 @@
 import os
 import numpy as np
 
-from src.ner.bert_utils import read_corpus_file, extract_labels, replace_labels, tokenize_and_align_labels
+from src.ner.bert_utils import (read_corpus_file, extract_labels, replace_labels,
+                                tokenize_and_align_labels)
 from datasets import Dataset, DatasetDict
-from transformers import (AutoTokenizer, AutoModelForTokenClassification, DataCollatorForTokenClassification,
-                          EarlyStoppingCallback)
+from transformers import (AutoTokenizer, AutoModelForTokenClassification,
+                          DataCollatorForTokenClassification, EarlyStoppingCallback)
 from transformers import TrainingArguments, Trainer
 from seqeval.metrics import classification_report
 from src.ner.ner_utils import dump_report
@@ -29,19 +30,28 @@ def compute_metrics(eval_preds):
 
 if __name__ == '__main__':
 
-    folders_dir = '../../data/corpus/v2/folders'
-    model_dir = '../../data/corpus/v2/models/ner'
-    results_dir = '../../data/corpus/v2/results_kfold/ner'
+    is_unify_tags = False
 
-    model_name = 'distilbert'
+    folders_dir = '../../data/corpus/v2/folders'
+
+    if is_unify_tags:
+        model_dir = '../../data/corpus/v2/models/ner_simp'
+        results_dir = '../../data/corpus/v2/results_simp_kfold/ner'
+    else:
+        model_dir = '../../data/corpus/v2/models/ner'
+        results_dir = '../../data/corpus/v2/results_kfold/ner'
+
+    # model_name = 'distilbert'
     # model_name = 'bert_base'
     # model_name = 'roberta_base'
     # model_name = 'bert_large'
-    # model_name = 'roberta_large'
+    model_name = 'roberta_large'
 
     num_epochs = 100
 
     batch_size = 32
+
+    learning_rate = 2e-5
 
     os.makedirs(results_dir, exist_ok=True)
 
@@ -91,9 +101,9 @@ if __name__ == '__main__':
 
         os.makedirs(results_folder_dir, exist_ok=True)
 
-        train_data = read_corpus_file(train_file, delimiter='\t', ner_column=1)
-        eval_data = read_corpus_file(eval_file, delimiter='\t', ner_column=1)
-        test_data = read_corpus_file(test_file, delimiter='\t', ner_column=1)
+        train_data = read_corpus_file(train_file, delimiter='\t', ner_column=1, is_unify_tags=is_unify_tags)
+        eval_data = read_corpus_file(eval_file, delimiter='\t', ner_column=1, is_unify_tags=is_unify_tags)
+        test_data = read_corpus_file(test_file, delimiter='\t', ner_column=1, is_unify_tags=is_unify_tags)
 
         label_names = extract_labels(labels=train_data['labels'])
 
@@ -160,7 +170,7 @@ if __name__ == '__main__':
             output_dir=training_model_dir,
             eval_strategy='epoch',
             save_strategy='epoch',
-            learning_rate=2e-5,
+            learning_rate=learning_rate,
             num_train_epochs=num_epochs,
             eval_steps=logging_eval_steps,
             logging_steps=logging_eval_steps,
@@ -181,7 +191,7 @@ if __name__ == '__main__':
             eval_dataset=tokenized_datasets['validation'],
             data_collator=data_collator,
             compute_metrics=compute_metrics,
-            tokenizer=tokenizer,
+            processing_class=tokenizer,
             callbacks=[EarlyStoppingCallback(early_stopping_patience=20)]
         )
 
