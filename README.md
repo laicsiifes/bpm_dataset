@@ -53,18 +53,22 @@ The approach consists of two key tasks:
    ```bash
    pip install -r requirements.txt
    ```
-3. **Run entity extraction**  
+3. **Run corpus construction**  
    ```bash
-   python run_ner.py --dataset data/bpm_texts.json
+   python src/corpus/*.py --dataset data/bpm_texts.json
    ```
-4. **Run relation classification**  
+4. **Run entity extraction**  
    ```bash
-   python run_rc.py --model roberta_large --input data/relations.json
+   python src/ner/*.py --model --input data
    ```
-5. **Evaluate models**  
+5. **Run relation classification**  
    ```bash
-   python evaluate.py --task ner --model bilstm_crf
-   python evaluate.py --task relation_classification --model roberta_large
+   python src/relation/*.py --model roberta_large --input data/relations.json
+   ```
+6. **Evaluate models**  
+   ```bash
+   python src/evaluation/*.py --task ner --model bilstm_crf
+   python src/evaluation/*.py --task relation_classification --model roberta_large
    ```
 
 ## 📖 **Reference**  
@@ -72,6 +76,21 @@ This research was conducted as part of the Master's dissertation:
 📄 **Diogo de Santana Candido**  
 📌 **Title:** Extraction of Entities and Business Process Constraints from Text  
 🏫 **Institution:** Instituto Federal do Espírito Santo (IFES), 2024  
+
+### 📄 **Citation**  
+If you use this dataset or code, please cite our work:  
+```
+@article{candido2024bpm,
+  author    = {Diogo de Santana Candido},
+  title     = {Extraction of Entities and Business Process Constraints from Text},
+  journal   = {ENIAC 2024 - Simpósio Nacional de Inteligência Artificial e Computacional},
+  year      = {2024},
+  url       = {https://sol.sbc.org.br/index.php/eniac/article/view/33860/33651}
+}
+```
+
+🔗 **Full Paper Available at:** [SBC OpenLib - ENIAC 2024](https://sol.sbc.org.br/index.php/eniac/article/view/33860/33651)
+ 
 
 ## 📫 **Contact**  
 For any questions or collaborations, feel free to reach out!  
