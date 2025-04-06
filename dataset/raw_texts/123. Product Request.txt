@@ -1,0 +1,1 @@
+When a new product is requested, the  step after  is to check the inventory. If the product is available, it is labeled and sent to the dock. Otherwise, the product is requested from the manufacturer and a delayed delivery notice is issued to the requester.

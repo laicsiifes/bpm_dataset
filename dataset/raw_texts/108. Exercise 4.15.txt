@@ -1,0 +1,1 @@
+If the report is not handled within 30 days, the process is stopped, the employee receives a cancellation notice email and must re-submit the expense report. However, if the reimbursement for the employee’s expenses had already been made, a money recall needs to be made, to get the money back from the employee, before sending the cancellation notice email.

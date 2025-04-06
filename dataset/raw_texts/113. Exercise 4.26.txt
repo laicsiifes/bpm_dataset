@@ -1,0 +1,2 @@
+Any time after the first transaction has failed, the customer may pay the invoice directly to the ISP. If so, the billing process is interrupted and the payment is registered. This direct payment must also cover the late fees, based on the number of days passed since Day 7 (the last day to avoid incurring late fees). If the direct payment does not include late fees, the
+ISP sends a notification to the customer that the fees will be charged in the next invoice, before concluding the process.

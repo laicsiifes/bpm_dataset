@@ -1,0 +1,5 @@
+The Order Modification Process is a collaboration between the Customer and ACME with the aim of updating or correcting a purchase order for a service or product. In ACME, the process involves the following roles: Sales Attendant (SA), Sales Manager (SM), and Inventory Manager (IM).
+
+The Customer prepares and sends the order modification request to ACME and waits for confirmation for 5 days. If no confirmation is received within this period, they resend the modification request. If still no response is received after 5 more days, or if a "Request cannot be fulfilled" message is received, the process ends, signaling the initiation of the Order Cancellation Process.
+
+Upon receiving the order modification request, the Sales Attendant (SA) records it and forwards it to the Sales Manager (SM). The SM evaluates the request and attempts to proceed with the update. If the update is successful, the SM sends the updated quotation to the Customer and waits for their confirmation. If the update cannot be made, the SM sends a "Request cannot be fulfilled" message, and the process ends.

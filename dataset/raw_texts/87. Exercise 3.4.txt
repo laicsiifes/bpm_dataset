@@ -1,0 +1,2 @@
+Once a loan application is received by the loan provider, and before proceeding with its
+assessment, the application itself needs to be checked for completeness. If the application is incomplete, it is returned to the applicant, so that they can fill out the missing information and send it back to the loan provider. This process is repeated until the application is found complete.

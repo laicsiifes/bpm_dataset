@@ -1,0 +1,42 @@
+[
+  {
+    "id": 9,
+    "text": "non_coexistence",
+    "prefixKey": null,
+    "suffixKey": "0",
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 10,
+    "text": "strict_dependence",
+    "prefixKey": null,
+    "suffixKey": "1",
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 11,
+    "text": "union",
+    "prefixKey": null,
+    "suffixKey": "2",
+    "backgroundColor": "#F44E3B",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 12,
+    "text": "circumstantial_dependence",
+    "prefixKey": null,
+    "suffixKey": "3",
+    "backgroundColor": "#FCC400",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 17,
+    "text": "perform",
+    "prefixKey": null,
+    "suffixKey": "4",
+    "backgroundColor": "#7B64FF",
+    "textColor": "#ffffff"
+  }
+]

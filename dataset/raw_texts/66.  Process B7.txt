@@ -1,0 +1,1 @@
+The MSPN registers the measurement at the GO. The GO examines the application of the MSPN. The GO rejects the application of the MSPN or the GO confirmes the application of the MSPN. The GO assigns the MSPN. The GO informs about the assignment of MSPN for the MSPO. The GO informs about the assignment of the MSPN for the MPO. The GO informs about the assignment of MSPN for the SP.

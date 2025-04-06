@@ -1,0 +1,13 @@
+The Product or Service Complaint Processing is a customer service support process involving the following roles: Complaints Attendant (CA), Product Analyst (PA), Service Analyst (SA), Quality Manager (QM), Customer Relationship Manager (CRM).
+
+The process begins with the customer contacting the attendant. This contact can occur through a voice call, WhatsApp, or personalized email. If the contact is made through a Voice Call or WhatsApp, the attendant must first register the customer's complaint in the Customer Service database. For this, the customer must provide their personal information (name, CPF, email). If the contact is made via a personalized email, the procedure is automated, and they can only send an email if they are a registered customer.
+
+If the customer cannot be located, they should be informed, and the order code related to the product or service must be provided for a new attempt at location. If the code is also not found, the CRM is notified. The customer's data is recorded, along with the description of their complaint. The customer is informed that the case will be analyzed and they will be contacted by the CRM via email. Subsequently, the process is concluded.
+
+If the customer is located, if necessary, their information is updated, and they are informed that all further notifications will be sent to the provided email. Their complaint is registered. The attendant attempts to resolve the issue. When the problem is resolved, the customer is invited to evaluate the service, and the process is terminated.
+
+If the attendant is unable to resolve the problem, a notification is sent to the QM, containing information about the issue. The QM then identifies the product or service and checks if there was any production anomaly on the date it was produced. When the Attendant cannot resolve the issue, if it pertains to a product, it is forwarded to the Product Analyst. If it relates to a service, the attendant forwards it to the Service Analyst.
+
+Upon receiving the issue, the Service Analyst performs the Problem Analysis process. After the problem analysis, a diagnosis is generated. A problem resolution procedure is also generated. Both are sent to the customer, and the process is terminated.
+
+When the process is forwarded to the Product Analyst, they check if the product is under warranty. Subsequently, they conduct a problem analysis and send an email to the customer with information on how to return the product to the company for repair and the repair cost. The process is then terminated.

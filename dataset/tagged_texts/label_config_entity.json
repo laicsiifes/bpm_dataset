@@ -1,0 +1,42 @@
+[
+  {
+    "id": 11,
+    "text": "activity",
+    "prefixKey": null,
+    "suffixKey": "0",
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 12,
+    "text": "actor",
+    "prefixKey": null,
+    "suffixKey": "1",
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 13,
+    "text": "catch",
+    "prefixKey": null,
+    "suffixKey": "2",
+    "backgroundColor": "#F44E3B",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 14,
+    "text": "trigger",
+    "prefixKey": null,
+    "suffixKey": "3",
+    "backgroundColor": "#FCDC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 15,
+    "text": "condition",
+    "prefixKey": null,
+    "suffixKey": "4",
+    "backgroundColor": "#FDA1FF",
+    "textColor": "#ffffff"
+  }
+]

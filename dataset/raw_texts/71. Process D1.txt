@@ -1,0 +1,1 @@
+The EC tells about the change of his master data for the INQ. The INQ notifies of the change for IP. The IP checks whether the master data can be changed at the desired time. The IP confirmes the changes of the INQ or the IP rejectes the changes of the INQ.
